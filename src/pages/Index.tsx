@@ -1,5 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "vturb-smartplayer": React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { id?: string },
+        HTMLElement
+      >;
+    }
+  }
+}
+
 const CTA_THRESHOLD = 390; // 6:30 in seconds
 
 const Index = () => {
