@@ -1,62 +1,48 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
+
+const CTA_THRESHOLD = 390; // 6:30 in seconds
 
 const Index = () => {
   const [showCTA, setShowCTA] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const playedSecondsRef = useRef(0);
-  const lastTimeRef = useRef<number | null>(null);
-  const animFrameRef = useRef<number | null>(null);
+  const vturbContainerRef = useRef<HTMLDivElement>(null);
+  const pollingRef = useRef<number | null>(null);
 
-  const CTA_THRESHOLD = 390; // 6 minutes 30 seconds
-
-  const trackPlayback = useCallback(() => {
-    const video = videoRef.current;
-    if (!video || video.paused || video.ended) {
-      lastTimeRef.current = null;
-      return;
-    }
-
-    const now = performance.now();
-    if (lastTimeRef.current !== null) {
-      const delta = (now - lastTimeRef.current) / 1000;
-      if (delta > 0 && delta < 1) {
-        playedSecondsRef.current += delta;
-      }
-    }
-    lastTimeRef.current = now;
-
-    if (playedSecondsRef.current >= CTA_THRESHOLD && !showCTA) {
-      setShowCTA(true);
-    }
-
-    animFrameRef.current = requestAnimationFrame(trackPlayback);
-  }, [showCTA]);
-
+  // Load VTurb script
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const onPlay = () => {
-      lastTimeRef.current = performance.now();
-      animFrameRef.current = requestAnimationFrame(trackPlayback);
-    };
-
-    const onPause = () => {
-      lastTimeRef.current = null;
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-    };
-
-    video.addEventListener("play", onPlay);
-    video.addEventListener("pause", onPause);
-    video.addEventListener("ended", onPause);
+    const script = document.createElement("script");
+    script.src =
+      "https://scripts.converteai.net/fd1282db-d399-4448-9f38-cb19b9659089/players/69daed2bccd7dd53185db12a/v4/player.js";
+    script.async = true;
+    document.head.appendChild(script);
 
     return () => {
-      video.removeEventListener("play", onPlay);
-      video.removeEventListener("pause", onPause);
-      video.removeEventListener("ended", onPause);
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+      script.remove();
     };
-  }, [trackPlayback]);
+  }, []);
+
+  // Poll VTurb player for playback time
+  useEffect(() => {
+    if (showCTA) return;
+
+    const poll = () => {
+      try {
+        const video = vturbContainerRef.current?.querySelector("video");
+        if (video && !video.paused && !video.ended && video.currentTime >= CTA_THRESHOLD) {
+          setShowCTA(true);
+          return;
+        }
+      } catch (_) {
+        // player not ready yet
+      }
+      pollingRef.current = window.requestAnimationFrame(poll);
+    };
+
+    pollingRef.current = window.requestAnimationFrame(poll);
+
+    return () => {
+      if (pollingRef.current) cancelAnimationFrame(pollingRef.current);
+    };
+  }, [showCTA]);
 
   return (
     <div className="upsell-gradient-bg min-h-screen flex flex-col items-center px-4 py-10 md:py-16">
@@ -82,32 +68,15 @@ const Index = () => {
         – Cómo hacer que tu pareja reconozca sus errores y cambie de forma más rápida
       </h2>
 
-      {/* Video placeholder */}
-      <div className="mt-8 video-wrapper-upsell relative flex items-center justify-center">
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          playsInline
-          preload="metadata"
-          controls
-        >
-          {/* Replace src with actual video URL */}
-          <source src="" type="video/mp4" />
-          Tu navegador no soporta el video.
-        </video>
-
-        {/* Play icon overlay when no src */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center">
-            <svg
-              className="w-8 h-8 text-primary-foreground ml-1"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 3l14 9-14 9V3z" />
-            </svg>
-          </div>
-        </div>
+      {/* VTurb Video Player */}
+      <div
+        ref={vturbContainerRef}
+        className="mt-8 video-wrapper-upsell relative flex items-center justify-center"
+      >
+        <vturb-smartplayer
+          id="vid-69daed2bccd7dd53185db12a"
+          style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
+        />
       </div>
 
       {/* Divider */}
