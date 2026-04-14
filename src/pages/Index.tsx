@@ -17,6 +17,7 @@ const Index = () => {
   const [showCTA, setShowCTA] = useState(false);
   const vturbContainerRef = useRef<HTMLDivElement>(null);
   const pollingRef = useRef<number | null>(null);
+  const hotmartLoadedRef = useRef(false);
 
   // Load VTurb script
   useEffect(() => {
@@ -29,6 +30,19 @@ const Index = () => {
     return () => {
       script.remove();
     };
+  }, []);
+
+  // Load Hotmart checkout elements script
+  useEffect(() => {
+    if (hotmartLoadedRef.current) return;
+    hotmartLoadedRef.current = true;
+    const script = document.createElement("script");
+    script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+    script.async = true;
+    script.onload = () => {
+      (window as any).checkoutElements?.init('salesFunnel').mount('#hotmart-sales-funnel');
+    };
+    document.head.appendChild(script);
   }, []);
 
   // Poll VTurb player for playback time
