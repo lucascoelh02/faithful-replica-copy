@@ -136,12 +136,7 @@ const Index = () => {
             : "opacity-0 translate-y-4 pointer-events-none h-0 overflow-hidden"
         }`}
       >
-        <a href="https://pay.hotmart.com/G105337427J?checkoutMode=10" className="cta-upsell pulse-glow" style={{ textDecoration: 'none' }}>
-          Sí, quiero aprovechar esta oportunidad
-        </a>
-        <span className="decline-link">
-          No, me gustaría rechazar esta oferta
-        </span>
+        <div id="hotmart-sales-funnel"></div>
       </div>
 
       {/* Spacer */}
