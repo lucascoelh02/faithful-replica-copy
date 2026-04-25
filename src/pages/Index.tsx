@@ -86,16 +86,6 @@ const Index = () => {
         </li>
       </ul>
 
-      {/* CTA Section - hidden until 6:30 of video */}
-      <div
-        className={`mt-8 flex flex-col items-center gap-4 transition-all duration-700 ${
-          showCTA
-            ? "opacity-100 translate-y-0 fade-in-up"
-            : "opacity-0 translate-y-4 pointer-events-none h-0 overflow-hidden"
-        }`}
-      >
-        <div id="hotmart-sales-funnel"></div>
-      </div>
 
       {/* Spacer */}
       <div className="h-12" />
