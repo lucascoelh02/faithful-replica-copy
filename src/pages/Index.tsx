@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 declare global {
   namespace JSX {
@@ -11,13 +11,8 @@ declare global {
   }
 }
 
-const CTA_THRESHOLD = 390; // 6:30 in seconds
-
 const Index = () => {
-  const [showCTA, setShowCTA] = useState(false);
   const vturbContainerRef = useRef<HTMLDivElement>(null);
-  const pollingRef = useRef<number | null>(null);
-  const hotmartLoadedRef = useRef(false);
 
   // Load VTurb script
   useEffect(() => {
@@ -31,43 +26,6 @@ const Index = () => {
       script.remove();
     };
   }, []);
-
-  // Load Hotmart checkout elements script
-  useEffect(() => {
-    if (hotmartLoadedRef.current) return;
-    hotmartLoadedRef.current = true;
-    const script = document.createElement("script");
-    script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
-    script.async = true;
-    script.onload = () => {
-      (window as any).checkoutElements?.init('salesFunnel').mount('#hotmart-sales-funnel');
-    };
-    document.head.appendChild(script);
-  }, []);
-
-  // Poll VTurb player for playback time
-  useEffect(() => {
-    if (showCTA) return;
-
-    const poll = () => {
-      try {
-        const video = vturbContainerRef.current?.querySelector("video");
-        if (video && !video.paused && !video.ended && video.currentTime >= CTA_THRESHOLD) {
-          setShowCTA(true);
-          return;
-        }
-      } catch (_) {
-        // player not ready yet
-      }
-      pollingRef.current = window.requestAnimationFrame(poll);
-    };
-
-    pollingRef.current = window.requestAnimationFrame(poll);
-
-    return () => {
-      if (pollingRef.current) cancelAnimationFrame(pollingRef.current);
-    };
-  }, [showCTA]);
 
   return (
     <div className="upsell-gradient-bg min-h-screen flex flex-col items-center px-4 py-10 md:py-16">
@@ -128,16 +86,6 @@ const Index = () => {
         </li>
       </ul>
 
-      {/* CTA Section - hidden until 6:30 of video */}
-      <div
-        className={`mt-8 flex flex-col items-center gap-4 transition-all duration-700 ${
-          showCTA
-            ? "opacity-100 translate-y-0 fade-in-up"
-            : "opacity-0 translate-y-4 pointer-events-none h-0 overflow-hidden"
-        }`}
-      >
-        <div id="hotmart-sales-funnel"></div>
-      </div>
 
       {/* Spacer */}
       <div className="h-12" />
