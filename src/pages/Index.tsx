@@ -106,6 +106,9 @@ const Index = () => {
       </ul>
 
 
+      {/* Hotmart Sales Funnel Widget */}
+      <div id="hotmart-sales-funnel" className="mt-6 w-full max-w-2xl" />
+
       {/* Spacer */}
       <div className="h-12" />
     </div>
