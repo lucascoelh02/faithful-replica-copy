@@ -27,6 +27,25 @@ const Index = () => {
     };
   }, []);
 
+  // Load Hotmart Sales Funnel widget
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+    script.async = true;
+    script.onload = () => {
+      // @ts-expect-error - checkoutElements is injected globally by Hotmart
+      if (typeof checkoutElements !== "undefined") {
+        // @ts-expect-error - checkoutElements is injected globally by Hotmart
+        checkoutElements.init("salesFunnel").mount("#hotmart-sales-funnel");
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      script.remove();
+    };
+  }, []);
+
   return (
     <div className="upsell-gradient-bg min-h-screen flex flex-col items-center px-4 py-10 md:py-16">
       {/* Headline */}
