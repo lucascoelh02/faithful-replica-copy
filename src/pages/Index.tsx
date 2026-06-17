@@ -72,7 +72,7 @@ const Index = () => {
         className="mt-8 video-wrapper-upsell relative flex items-center justify-center"
       >
         <vturb-smartplayer
-          id="vid-69daed2bccd7dd53185db12a"
+          id="vid-6a32c50264ae5a734069d5a2"
           style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
         />
       </div>
