@@ -18,7 +18,7 @@ const Index = () => {
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "https://scripts.converteai.net/fd1282db-d399-4448-9f38-cb19b9659089/players/69daed2bccd7dd53185db12a/v4/player.js";
+      "https://scripts.converteai.net/f025e9be-2815-40bc-b5b8-eee93ab897e7/players/6a32c50264ae5a734069d5a2/v4/player.js";
     script.async = true;
     document.head.appendChild(script);
 
