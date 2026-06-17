@@ -27,17 +27,13 @@ const Index = () => {
     };
   }, []);
 
-  // Load Hotmart Sales Funnel widget
+  // HOTMART - Sales Funnel Widget
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
-    script.async = true;
     script.onload = () => {
       // @ts-expect-error - checkoutElements is injected globally by Hotmart
-      if (typeof checkoutElements !== "undefined") {
-        // @ts-expect-error - checkoutElements is injected globally by Hotmart
-        checkoutElements.init("salesFunnel").mount("#hotmart-sales-funnel");
-      }
+      checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
     };
     document.body.appendChild(script);
 
