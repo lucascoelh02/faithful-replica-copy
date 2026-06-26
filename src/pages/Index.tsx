@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 declare global {
   namespace JSX {
@@ -13,6 +13,13 @@ declare global {
 
 const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
+  const [showWidget, setShowWidget] = useState(false);
+
+  // Delayed display for Hotmart widget
+  useEffect(() => {
+    const timer = setTimeout(() => setShowWidget(true), 510000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Load VTurb script
   useEffect(() => {
@@ -103,7 +110,9 @@ const Index = () => {
 
 
       {/* Hotmart Sales Funnel Widget */}
-      <div id="hotmart-sales-funnel" className="mt-6 w-full max-w-2xl" />
+      <div className={`mt-6 w-full max-w-2xl ${showWidget ? "block" : "hidden"}`}>
+        <div id="hotmart-sales-funnel" />
+      </div>
 
       {/* Spacer */}
       <div className="h-12" />
