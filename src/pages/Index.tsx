@@ -80,9 +80,21 @@ const Index = () => {
         className="mt-8 video-wrapper-upsell relative flex items-center justify-center"
       >
         <vturb-smartplayer
-          id="vid-6a32c50264ae5a734069d5a2"
+          id="vid-6a443d7046cd7a90d1058c1e"
           style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
-        />
+        >
+          <div
+            className="vturb-player-placeholder"
+            style={{
+              position: "relative",
+              width: "100%",
+              padding: "178.05555555555554% 0 0",
+              zIndex: 0,
+              backgroundColor: "black",
+            }}
+          />
+        </vturb-smartplayer>
+
       </div>
 
       {/* Divider */}
