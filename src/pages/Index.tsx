@@ -25,7 +25,7 @@ const Index = () => {
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "https://scripts.converteai.net/f025e9be-2815-40bc-b5b8-eee93ab897e7/players/6a32c50264ae5a734069d5a2/v4/player.js";
+      "https://scripts.converteai.net/2d21432a-6713-4192-8613-1bf4c67b1af6/players/6a443d7046cd7a90d1058c1e/v4/player.js";
     script.async = true;
     document.head.appendChild(script);
 
@@ -33,6 +33,7 @@ const Index = () => {
       script.remove();
     };
   }, []);
+
 
   // HOTMART - Sales Funnel Widget
   useEffect(() => {
@@ -79,9 +80,21 @@ const Index = () => {
         className="mt-8 video-wrapper-upsell relative flex items-center justify-center"
       >
         <vturb-smartplayer
-          id="vid-6a32c50264ae5a734069d5a2"
+          id="vid-6a443d7046cd7a90d1058c1e"
           style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
-        />
+        >
+          <div
+            className="vturb-player-placeholder"
+            style={{
+              position: "relative",
+              width: "100%",
+              padding: "178.05555555555554% 0 0",
+              zIndex: 0,
+              backgroundColor: "black",
+            }}
+          />
+        </vturb-smartplayer>
+
       </div>
 
       {/* Divider */}
