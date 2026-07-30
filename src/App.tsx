@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Downsell from "./pages/Downsell.tsx";
+import AdiosImanToxico from "./pages/AdiosImanToxico.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
 
           <Route path="/downsell" element={<Downsell />} />
+
+          <Route path="/adios-iman-toxico" element={<AdiosImanToxico />} />
 
           {/* Mantenha esta rota sempre por último */}
           <Route path="*" element={<NotFound />} />
