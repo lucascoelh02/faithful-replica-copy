@@ -74,6 +74,255 @@
 }
 
 @layer components {
+  /* ---------- Stage / background ---------- */
+  .bg-stage {
+    background-color: #04060a;
+  }
+
+  .expert-bg {
+    position: fixed;
+    inset: 0;
+    background-color: #04060a;
+    background-image: var(--expert-photo, none);
+    background-size: cover;
+    background-position: 50% 18%;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+
+  @media (min-width: 768px) {
+    .expert-bg {
+      background-position: 50% 28%;
+    }
+  }
+
+  .stage-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(4, 6, 10, 0.35) 0%, rgba(4, 6, 10, 0.82) 55%, rgba(4, 6, 10, 0.96) 100%),
+      linear-gradient(180deg, rgba(4, 6, 10, 0.7) 0%, rgba(4, 6, 10, 0.55) 35%, rgba(4, 6, 10, 0.95) 100%);
+  }
+
+  .stage-noise {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .gold-dots {
+    position: absolute;
+    top: 64px;
+    left: 16px;
+    z-index: 3;
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+  }
+
+  .gold-dots span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #d4920a, #ffd44f 55%, #e8a510);
+    opacity: 0.7;
+  }
+
+  .gold-dots span:nth-child(1) { top: 0; left: 0; }
+  .gold-dots span:nth-child(2) { top: 14px; left: 22px; opacity: 0.45; }
+  .gold-dots span:nth-child(3) { top: 30px; left: 6px; opacity: 0.6; }
+  .gold-dots span:nth-child(4) { top: 44px; left: 30px; opacity: 0.35; }
+  .gold-dots span:nth-child(5) { top: 8px; left: 46px; opacity: 0.3; }
+  .gold-dots span:nth-child(6) { top: 58px; left: 12px; opacity: 0.25; }
+
+  /* ---------- Urgency bar ---------- */
+  .urgency-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #1a0207 0%, #3d030b 45%, #0a0203 100%);
+    border-bottom: 1px solid rgba(204, 0, 0, 0.55);
+    overflow: hidden;
+  }
+
+  .urgency-bar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+    animation: urgencySweep 4.5s linear infinite;
+  }
+
+  @keyframes urgencySweep {
+    from { transform: translateX(-120%); }
+    to { transform: translateX(320%); }
+  }
+
+  .urgency-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .urgency-clock {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    flex-shrink: 0;
+  }
+
+  .urgency-text {
+    color: #ffffff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .urgency-dots {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .urgency-dots i {
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: #cc0000;
+    display: block;
+    animation: urgencyPulse 1.4s ease-in-out infinite;
+  }
+
+  .urgency-dots i:nth-child(2) { animation-delay: 0.2s; }
+  .urgency-dots i:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes urgencyPulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  /* ---------- Headline ---------- */
+  .headline {
+    max-width: 460px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1.375rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
+  }
+
+  @media (min-width: 768px) {
+    .headline {
+      font-size: 1.75rem;
+    }
+  }
+
+  .gold-text {
+    background: linear-gradient(100deg, #d4920a 0%, #ffd44f 50%, #e8a510 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- Player frame ---------- */
+  .player-frame {
+    width: 100%;
+    max-width: 380px;
+    border: 3px solid rgba(255, 255, 255, 0.14);
+    border-radius: 17px;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.75),
+      0 0 22px rgba(39, 175, 96, 0.12);
+  }
+
+  .player-inner {
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  /* ---------- CTA area (Hotmart widget) ---------- */
+  .cta-area {
+    max-width: 380px;
+  }
+
+  .cta-area button,
+  .cta-area a[role="button"],
+  .cta-area .hot-button,
+  .cta-area [class*="button"]:not([class*="link"]) {
+    background: linear-gradient(180deg, #2fc46e 0%, #27af60 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 22px rgba(39, 175, 96, 0.28) !important;
+    transition: transform 0.15s ease, filter 0.2s ease;
+  }
+
+  .cta-area button:hover,
+  .cta-area a[role="button"]:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+
+  .cta-area button:active,
+  .cta-area a[role="button"]:active {
+    transform: scale(0.99);
+  }
+
+  .cta-area a:not([role="button"]) {
+    color: rgba(255, 255, 255, 0.55) !important;
+    font-size: 0.8125rem !important;
+    text-decoration: underline;
+  }
+
+  /* ---------- Security signal ---------- */
+  .secure-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+  }
+
+  .secure-box svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .urgency-bar::after,
+    .urgency-dots i,
+    .fade-in-up,
+    .pulse-glow {
+      animation: none !important;
+    }
+  }
+
   .upsell-gradient-bg {
     background: var(--gradient-dark);
   }
@@ -95,6 +344,7 @@
     );
     margin: 0 auto;
   }
+
 
   .cta-upsell {
     background-color: hsl(var(--cta-bg));
