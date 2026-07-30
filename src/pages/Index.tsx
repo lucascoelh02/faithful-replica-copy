@@ -13,6 +13,21 @@ declare global {
   }
 }
 
+const SECONDS_TO_DISPLAY = 290;
+const STORAGE_KEY = "alreadyElsDisplayed290";
+
+const showHotmartFunnel = () => {
+  const section = document.querySelector<HTMLElement>("#hotmart-funnel-section");
+  if (!section) return;
+  section.style.display = "block";
+  requestAnimationFrame(() => section.classList.add("is-visible"));
+  try {
+    localStorage.setItem(STORAGE_KEY, "true");
+  } catch {
+    /* ignore */
+  }
+};
+
 const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +43,74 @@ const Index = () => {
       script.remove();
     };
   }, []);
+
+  // Load Hotmart checkout elements script once and mount the widget once
+  useEffect(() => {
+    let mounted = false;
+
+    const mount = () => {
+      if (mounted) return;
+      const el = document.querySelector("#hotmart-sales-funnel");
+      const ce = (window as unknown as { checkoutElements?: any }).checkoutElements;
+      if (!el || !ce || el.childElementCount > 0) return;
+      mounted = true;
+      ce.init("salesFunnel").mount("#hotmart-sales-funnel");
+    };
+
+    const SRC = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+    let script = document.querySelector<HTMLScriptElement>(`script[src="${SRC}"]`);
+    if (!script) {
+      script = document.createElement("script");
+      script.src = SRC;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    if ((window as unknown as { checkoutElements?: unknown }).checkoutElements) {
+      mount();
+    } else {
+      script.addEventListener("load", mount);
+    }
+
+    return () => {
+      script?.removeEventListener("load", mount);
+    };
+  }, []);
+
+  // Reveal widget based on real VTurb video progress (or previous unlock)
+  useEffect(() => {
+    let released = false;
+    try {
+      if (localStorage.getItem(STORAGE_KEY) === "true") {
+        released = true;
+        showHotmartFunnel();
+      }
+    } catch {
+      /* ignore */
+    }
+    if (released) return;
+
+    let attempts = 0;
+    const watch = () => {
+      const sp = (window as unknown as { smartplayer?: any }).smartplayer;
+      if (!sp || !sp.instances || !sp.instances.length) return false;
+      const player = sp.instances[0];
+      player.on("timeupdate", () => {
+        if (player.video?.currentTime >= SECONDS_TO_DISPLAY) {
+          showHotmartFunnel();
+        }
+      });
+      return true;
+    };
+
+    if (watch()) return;
+    const interval = window.setInterval(() => {
+      attempts += 1;
+      if (watch() || attempts > 120) window.clearInterval(interval);
+    }, 500);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-stage">
