@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import expertBg from "@/assets/expert-bg.png.asset.json";
+
+const EXPERT_BG_URL = "/images/background-upsell.png";
 
 declare global {
   namespace JSX {
