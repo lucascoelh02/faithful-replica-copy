@@ -51,84 +51,90 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="upsell-gradient-bg min-h-screen flex flex-col items-center px-4 py-10 md:py-16">
-      {/* Headline */}
-      <h1 className="text-3xl md:text-5xl font-black text-foreground text-center tracking-tight">
-        ¡FELICIDADES!
-      </h1>
-
-      {/* Subheadline */}
-      <p className="mt-3 text-base md:text-lg text-foreground text-center max-w-2xl">
-        Acabas de asegurar tu acceso y la{" "}
-        <strong>clase inaugural</strong> ya está disponible:
-      </p>
-
-      {/* Divider */}
-      <div className="divider-line my-6" />
-
-      {/* Lesson title */}
-      <h2 className="text-xl md:text-2xl font-bold text-foreground text-center max-w-2xl leading-snug">
-        <span className="highlight-label italic underline font-extrabold">
-          CLASE 01
-        </span>{" "}
-        – Cómo hacer que tu pareja reconozca sus errores y cambie de forma más rápida
-      </h2>
-
-      {/* VTurb Video Player */}
-      <div
-        ref={vturbContainerRef}
-        className="mt-8 video-wrapper-upsell relative flex items-center justify-center"
-      >
-        <vturb-smartplayer
-          id="vid-6a443d7046cd7a90d1058c1e"
-          style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
-        >
-          <div
-            className="vturb-player-placeholder"
-            style={{
-              position: "relative",
-              width: "100%",
-              padding: "178.05555555555554% 0 0",
-              zIndex: 0,
-              backgroundColor: "black",
-            }}
-          />
-        </vturb-smartplayer>
-
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-stage">
+      {/* Expert photo background + overlays */}
+      <div className="expert-bg" aria-hidden="true" />
+      <div className="stage-overlay" aria-hidden="true" />
+      <div className="stage-noise" aria-hidden="true" />
+      <div className="gold-dots" aria-hidden="true">
+        <span /><span /><span /><span /><span /><span />
       </div>
 
-      {/* Divider */}
-      <div className="divider-line my-6" />
-
-      {/* Description text */}
-      <p className="text-sm md:text-base font-semibold text-foreground text-center max-w-2xl">
-        Durante esta clase inaugural vas a descubrir: mira el video a continuación:
-      </p>
-
-      {/* Checklist */}
-      <ul className="mt-4 flex flex-col md:flex-row md:flex-wrap justify-center gap-2 md:gap-6 text-sm md:text-base text-foreground">
-        <li className="flex items-center gap-2">
-          <span>✅</span>
-          <span>Los primeros pasos de la restauración</span>
-        </li>
-        <li className="flex items-center gap-2">
-          <span>✅</span>
-          <span>Cómo identificar dónde está tu relación ahora</span>
-        </li>
-        <li className="flex items-center gap-2">
-          <span>✅</span>
-          <span>La metodología completa que vamos a usar</span>
-        </li>
-      </ul>
-
-
-      {/* Hotmart Sales Funnel Widget */}
-      <div className={`mt-6 w-full max-w-2xl ${showWidget ? "block" : "hidden"}`}>
-        <div id="hotmart-sales-funnel" />
+      {/* Fixed urgency bar */}
+      <div className="urgency-bar" role="status" aria-live="polite">
+        <div className="urgency-inner">
+          <svg
+            className="urgency-clock"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg>
+          <span className="urgency-text">Tu compra está siendo procesada</span>
+          <span className="urgency-dots" aria-hidden="true">
+            <i /><i /><i />
+          </span>
+        </div>
       </div>
 
-      {/* Spacer */}
-      <div className="h-12" />
+      {/* Spacer for the fixed bar */}
+      <div className="h-12" aria-hidden="true" />
+
+      <main className="relative z-10 mx-auto flex w-full max-w-[520px] flex-col items-center px-5 pb-16 pt-8">
+        <h1 className="headline">
+          Mira la clase de bienvenida y reclama tu{" "}
+          <span className="gold-text">regalo especial</span>.
+        </h1>
+
+        {/* VTurb Video Player */}
+        <div ref={vturbContainerRef} className="player-frame mt-7">
+          <div className="player-inner">
+            <vturb-smartplayer
+              id="vid-6a443d7046cd7a90d1058c1e"
+              aria-label="Clase de bienvenida en video"
+              style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
+            >
+              <div
+                className="vturb-player-placeholder"
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  padding: "178.05555555555554% 0 0",
+                  zIndex: 0,
+                  backgroundColor: "black",
+                }}
+              />
+            </vturb-smartplayer>
+          </div>
+        </div>
+
+        {/* Hotmart Sales Funnel Widget (CTA area) */}
+        <div className={`cta-area mt-7 w-full ${showWidget ? "block" : "hidden"}`}>
+          <div id="hotmart-sales-funnel" />
+        </div>
+
+        {/* Security signal */}
+        <div className="secure-box mt-5">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3z" />
+            <path d="M9.5 12.2l1.9 1.9 3.4-3.6" />
+          </svg>
+          <span>Compra 100% segura · Procesamiento cifrado</span>
+        </div>
+      </main>
     </div>
   );
 };
