@@ -85,14 +85,14 @@
     background-color: #04060a;
     background-image: var(--expert-photo, none);
     background-size: cover;
-    background-position: 50% 18%;
+    background-position: center right;
     background-repeat: no-repeat;
     z-index: 0;
   }
 
-  @media (min-width: 768px) {
+  @media (max-width: 767px) {
     .expert-bg {
-      background-position: 50% 28%;
+      background-position: 78% center;
     }
   }
 

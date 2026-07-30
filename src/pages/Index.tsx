@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import expertBg from "@/assets/expert-bg.png.asset.json";
 
 declare global {
   namespace JSX {
@@ -52,10 +53,12 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-stage">
-      {/* Expert photo background + overlays */}
-      <div className="expert-bg" aria-hidden="true" />
-      <div className="stage-overlay" aria-hidden="true" />
-      <div className="stage-noise" aria-hidden="true" />
+      {/* Expert photo background */}
+      <div
+        className="expert-bg"
+        aria-hidden="true"
+        style={{ ["--expert-photo" as string]: `url(${expertBg.url})` }}
+      />
       <div className="gold-dots" aria-hidden="true">
         <span /><span /><span /><span /><span /><span />
       </div>
