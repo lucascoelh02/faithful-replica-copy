@@ -14,13 +14,6 @@ declare global {
 
 const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
-  const [showWidget, setShowWidget] = useState(false);
-
-  // Delayed display for Hotmart widget
-  useEffect(() => {
-    const timer = setTimeout(() => setShowWidget(true), 510000);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Load VTurb script
   useEffect(() => {
@@ -29,22 +22,6 @@ const Index = () => {
       "https://scripts.converteai.net/2d21432a-6713-4192-8613-1bf4c67b1af6/players/6a443d7046cd7a90d1058c1e/v4/player.js";
     script.async = true;
     document.head.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
-  }, []);
-
-
-  // HOTMART - Sales Funnel Widget
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
-    script.onload = () => {
-      // @ts-expect-error - checkoutElements is injected globally by Hotmart
-      checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
-    };
-    document.body.appendChild(script);
 
     return () => {
       script.remove();
