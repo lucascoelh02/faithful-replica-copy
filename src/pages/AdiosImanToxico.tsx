@@ -2,7 +2,6 @@ import { useState } from "react";
 import "@/styles/adios-iman-toxico.css";
 
 const VSL_URL = "[URL_DA_VSL_DOWNSELL]";
-const CHECKOUT_URL = "[URL_CHECKOUT_DOWNSELL]";
 
 const isConfigured = (value: string) => !!value && !value.startsWith("[");
 
@@ -41,12 +40,6 @@ const CheckIcon = () => (
   <svg className="ait-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M20 6L9 17l-5-5" />
   </svg>
-);
-
-const Cta = () => (
-  <a className="ait-cta" href={CHECKOUT_URL}>
-    Sí, quiero añadir Adiós al Imán Tóxico por US$ 9,90
-  </a>
 );
 
 const AdiosImanToxico = () => {
@@ -135,14 +128,9 @@ const AdiosImanToxico = () => {
             <p className="ait-old">Precio anterior: US$ 14,90</p>
             <p className="ait-now-label">Hoy en este flujo</p>
             <p className="ait-price">US$ 9,90</p>
-            <Cta />
           </div>
 
           <p className="ait-guarantee">Tu decisión está protegida por una garantía de 7 días.</p>
-        </section>
-
-        <section className="ait-section ait-fade">
-          <Cta />
         </section>
 
         <footer className="ait-footer">

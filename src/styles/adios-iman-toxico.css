@@ -236,30 +236,6 @@
   line-height: 1.1;
 }
 
-.ait-cta {
-  display: block;
-  width: 100%;
-  margin-top: 22px;
-  padding: 16px 20px;
-  border-radius: 10px;
-  background: var(--ait-gold);
-  color: #14100a;
-  font-size: 0.98rem;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  transition: filter 0.2s ease, transform 0.2s ease;
-}
-
-.ait-cta:hover {
-  filter: brightness(1.07);
-}
-
-.ait-cta:focus-visible {
-  outline: 2px solid var(--ait-text);
-  outline-offset: 3px;
-}
-
 .ait-guarantee {
   margin-top: 18px;
   font-size: 0.85rem;
