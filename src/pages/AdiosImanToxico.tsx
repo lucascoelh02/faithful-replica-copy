@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "@/styles/adios-iman-toxico.css";
 
 const pillars = [
@@ -38,6 +39,37 @@ const CheckIcon = () => (
 );
 
 const AdiosImanToxico = () => {
+  useEffect(() => {
+    let mounted = false;
+
+    const mount = () => {
+      if (mounted) return;
+      const el = document.querySelector("#hotmart-sales-funnel");
+      const ce = (window as unknown as { checkoutElements?: any }).checkoutElements;
+      if (!el || !ce || el.childElementCount > 0) return;
+      mounted = true;
+      ce.init("salesFunnel").mount("#hotmart-sales-funnel");
+    };
+
+    const SRC = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+    let script = document.querySelector<HTMLScriptElement>(`script[src="${SRC}"]`);
+    if (!script) {
+      script = document.createElement("script");
+      script.src = SRC;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    if ((window as unknown as { checkoutElements?: unknown }).checkoutElements) {
+      mount();
+    } else {
+      script.addEventListener("load", mount);
+    }
+
+    return () => {
+      script?.removeEventListener("load", mount);
+    };
+  }, []);
+
   return (
     <div className="ait-page">
       <div className="ait-glow" aria-hidden="true" />
@@ -107,6 +139,13 @@ const AdiosImanToxico = () => {
 
           <p className="ait-guarantee">Tu decisión está protegida por una garantía de 7 días.</p>
         </section>
+
+        {/* HOTMART - Sales Funnel Widget */}
+        <section id="hotmart-funnel-section" className="ait-funnel">
+          <div id="hotmart-sales-funnel" />
+        </section>
+
+
 
         <footer className="ait-footer">
           <p>Rafael Montoya</p>
