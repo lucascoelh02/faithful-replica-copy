@@ -110,7 +110,7 @@ const AdiosImanToxico = () => {
 
         <footer className="ait-footer">
           <p>Rafael Montoya</p>
-          <p text="text-0="true">Todos los derechos reservados.</p>
+          <p>Todos los derechos reservados.</p>
         </footer>
       </div>
     </div>
