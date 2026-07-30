@@ -102,7 +102,7 @@ const AdiosImanToxico = () => {
           <div className="ait-offer">
             <p className="ait-old">Precio anterior: US$ 14,90</p>
             <p className="ait-now-label">Hoy en este flujo</p>
-            <p className="ait-price">US$ 9,90</p>
+            <p className="ait-price">US$ 7,90</p>
           </div>
 
           <p className="ait-guarantee">Tu decisión está protegida por una garantía de 7 días.</p>
