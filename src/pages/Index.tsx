@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import expertBg from "@/assets/expert-bg.png.asset.json";
+
+const EXPERT_BG_URL = "/images/background-upsell.png";
 
 declare global {
   namespace JSX {
@@ -34,7 +35,7 @@ const Index = () => {
       <div
         className="expert-bg"
         aria-hidden="true"
-        style={{ ["--expert-photo" as string]: `url(${expertBg.url})` }}
+        style={{ ["--expert-photo" as string]: `url("${EXPERT_BG_URL}")` }}
       />
       <div className="gold-dots" aria-hidden="true">
         <span /><span /><span /><span /><span /><span />
