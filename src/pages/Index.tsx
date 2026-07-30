@@ -93,11 +93,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Hotmart Sales Funnel Widget (CTA area) */}
-        <div className={`cta-area mt-7 w-full ${showWidget ? "block" : "hidden"}`}>
-          <div id="hotmart-sales-funnel" />
-        </div>
-
         {/* Security signal */}
         <div className="secure-box mt-5">
           <svg
