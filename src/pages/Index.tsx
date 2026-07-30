@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import expertBg from "@/assets/expert-bg.png.asset.json";
 
 declare global {

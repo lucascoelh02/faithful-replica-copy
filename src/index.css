@@ -261,40 +261,6 @@
     overflow: hidden;
   }
 
-  /* ---------- CTA area (Hotmart widget) ---------- */
-  .cta-area {
-    max-width: 380px;
-  }
-
-  .cta-area button,
-  .cta-area a[role="button"],
-  .cta-area .hot-button,
-  .cta-area [class*="button"]:not([class*="link"]) {
-    background: linear-gradient(180deg, #2fc46e 0%, #27af60 100%) !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-radius: 10px !important;
-    box-shadow: 0 8px 22px rgba(39, 175, 96, 0.28) !important;
-    transition: transform 0.15s ease, filter 0.2s ease;
-  }
-
-  .cta-area button:hover,
-  .cta-area a[role="button"]:hover {
-    filter: brightness(1.08);
-    transform: translateY(-1px);
-  }
-
-  .cta-area button:active,
-  .cta-area a[role="button"]:active {
-    transform: scale(0.99);
-  }
-
-  .cta-area a:not([role="button"]) {
-    color: rgba(255, 255, 255, 0.55) !important;
-    font-size: 0.8125rem !important;
-    text-decoration: underline;
-  }
-
   /* ---------- Security signal ---------- */
   .secure-box {
     display: flex;
