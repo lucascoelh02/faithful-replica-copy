@@ -35,7 +35,7 @@ const Index = () => {
       <div
         className="expert-bg"
         aria-hidden="true"
-        style={{ ["--expert-photo" as string]: `url(${expertBg.url})` }}
+        style={{ ["--expert-photo" as string]: `url("${EXPERT_BG_URL}")` }}
       />
       <div className="gold-dots" aria-hidden="true">
         <span /><span /><span /><span /><span /><span />
