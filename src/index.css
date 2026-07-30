@@ -280,6 +280,20 @@
     flex-shrink: 0;
   }
 
+  /* ---------- Hotmart funnel section (time-gated) ---------- */
+  #hotmart-funnel-section {
+    display: none;
+    width: 100%;
+    margin-top: 28px;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  #hotmart-funnel-section.is-visible {
+    opacity: 1;
+  }
+
+
   @media (prefers-reduced-motion: reduce) {
     .urgency-bar::after,
     .urgency-dots i,
