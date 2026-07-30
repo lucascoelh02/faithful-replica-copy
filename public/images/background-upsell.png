@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: Set the document title to the name of your application -->
+    <title>Upsell 1</title>
+    <meta name="description" content="Upsell 1">
+    <meta name="author" content="Lovable" />
+
+    <!-- TODO: Update og:title to match your application name -->
+    
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9815c227-42b9-49cc-b0fc-288d8591e2cf/id-preview-7b3099ea--004ebae2-d73b-47af-b659-4e9675af1e90.lovable.app-1775915378181.png">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9815c227-42b9-49cc-b0fc-288d8591e2cf/id-preview-7b3099ea--004ebae2-d73b-47af-b659-4e9675af1e90.lovable.app-1775915378181.png">
+    <meta property="og:title" content="Upsell 1">
+  <meta name="twitter:title" content="Upsell 1">
+  <meta property="og:description" content="Upsell 1">
+  <meta name="twitter:description" content="Upsell 1">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- VTurb / ConverteAI performance optimization -->
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/2d21432a-6713-4192-8613-1bf4c67b1af6/players/6a443d7046cd7a90d1058c1e/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/2d21432a-6713-4192-8613-1bf4c67b1af6/6a443d171acbcb48d9245a85/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://license.vturb.com">
+
+
+  <!-- Meta Pixel removed -->
+</head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
