@@ -34,8 +34,10 @@ const Index = () => {
   // Load VTurb script
   useEffect(() => {
     const script = document.createElement("script");
-    script.src =
-      "https://scripts.converteai.net/2d21432a-6713-4192-8613-1bf4c67b1af6/players/6a443d7046cd7a90d1058c1e/v4/player.js";
+    const SRC =
+      "https://scripts.converteai.net/a63caa10-e974-4189-be32-9f2c7cd675f5/players/6a6b2e4240f9e76dea05afb1/v4/player.js";
+    if (document.querySelector(`script[src="${SRC}"]`)) return;
+    script.src = SRC;
     script.async = true;
     document.head.appendChild(script);
 
@@ -159,7 +161,7 @@ const Index = () => {
         <div ref={vturbContainerRef} className="player-frame mt-7">
           <div className="player-inner">
             <vturb-smartplayer
-              id="vid-6a443d7046cd7a90d1058c1e"
+              id="vid-6a6b2e4240f9e76dea05afb1"
               aria-label="Clase de bienvenida en video"
               style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
             >
@@ -168,7 +170,7 @@ const Index = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  padding: "178.05555555555554% 0 0",
+                  padding: "178.14814814814815% 0 0",
                   zIndex: 0,
                   backgroundColor: "black",
                 }}
