@@ -1,9 +1,4 @@
-import { useState } from "react";
 import "@/styles/adios-iman-toxico.css";
-
-const VSL_URL = "[URL_DA_VSL_DOWNSELL]";
-
-const isConfigured = (value: string) => !!value && !value.startsWith("[");
 
 const pillars = [
   {
@@ -43,8 +38,6 @@ const CheckIcon = () => (
 );
 
 const AdiosImanToxico = () => {
-  const [videoError, setVideoError] = useState(false);
-
   return (
     <div className="ait-page">
       <div className="ait-glow" aria-hidden="true" />
@@ -65,24 +58,6 @@ const AdiosImanToxico = () => {
             Adiós al Imán Tóxico te ayuda a dejar de sentirte atraída por los hombres que siempre
             terminan haciéndote daño.
           </p>
-
-          <div className="ait-player">
-            {!isConfigured(VSL_URL) ? (
-              <div className="ait-player-fallback">VSL pendiente de configuración.</div>
-            ) : videoError ? (
-              <div className="ait-player-fallback">
-                No fue posible cargar el video. Inténtalo nuevamente.
-              </div>
-            ) : (
-              <iframe
-                src={VSL_URL}
-                title="Adiós al Imán Tóxico"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                onError={() => setVideoError(true)}
-              />
-            )}
-          </div>
         </header>
 
         <section className="ait-section ait-fade">
