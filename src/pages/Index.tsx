@@ -193,7 +193,13 @@ const Index = () => {
           </svg>
           <span>Compra 100% segura · Procesamiento cifrado</span>
         </div>
+
+        {/* Hotmart Sales Funnel widget — revealed at 4:50 of real video progress */}
+        <section id="hotmart-funnel-section" aria-hidden="false">
+          <div id="hotmart-sales-funnel" />
+        </section>
       </main>
+
     </div>
   );
 };
