@@ -284,14 +284,36 @@
   #hotmart-funnel-section {
     display: none;
     width: 100%;
-    margin-top: 28px;
+    max-width: 380px;
+    margin: 28px auto 0;
     opacity: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
     transition: opacity 0.45s ease;
   }
 
   #hotmart-funnel-section.is-visible {
     opacity: 1;
   }
+
+  #hotmart-sales-funnel {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  #hotmart-sales-funnel .custom-element__iframe {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    color-scheme: normal;
+  }
+
+
 
 
   @media (prefers-reduced-motion: reduce) {
