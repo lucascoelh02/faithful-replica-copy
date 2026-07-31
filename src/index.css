@@ -280,8 +280,8 @@
     flex-shrink: 0;
   }
 
-  /* ---------- Hotmart funnel section (time-gated) ---------- */
-  #hotmart-funnel-section {
+  /* ---------- Hotmart funnel section ---------- */
+  .bg-stage #hotmart-funnel-section {
     display: none;
     width: 100%;
     max-width: 380px;
@@ -293,26 +293,100 @@
     transition: opacity 0.45s ease;
   }
 
-  #hotmart-funnel-section.is-visible {
+  .bg-stage #hotmart-funnel-section.is-visible {
     opacity: 1;
   }
 
-  #hotmart-sales-funnel {
+  .hotmart-funnel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hotmart-widget-viewport {
+    --hotmart-mask-background: #04060a;
+    position: relative;
+    isolation: isolate;
+    width: min(100%, 400px);
+    height: 184px;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .hotmart-widget-viewport #hotmart-sales-funnel {
+    position: absolute;
+    inset: 0;
     width: 100%;
     background: transparent;
     border: 0;
     box-shadow: none;
   }
 
-  #hotmart-sales-funnel .custom-element__iframe {
+  .hotmart-widget-viewport #hotmart-sales-funnel iframe,
+  .hotmart-widget-viewport #hotmart-sales-funnel .custom-element__iframe {
     display: block;
-    margin: 0 auto;
-    width: 100%;
+    position: absolute !important;
+    top: 0;
+    left: 50%;
+    width: 400px !important;
+    max-width: none !important;
+    height: 440px !important;
+    margin: 0;
+    transform: translate(-50%, -154px);
+    transform-origin: top center;
     background: transparent;
     border: 0;
     color-scheme: normal;
   }
 
+  .hotmart-widget-mask {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    pointer-events: none;
+    background: var(--hotmart-mask-background);
+  }
+
+  .hotmart-widget-mask--legal {
+    top: 84px;
+    right: 0;
+    left: 0;
+    height: 60px;
+  }
+
+  .hotmart-widget-mask--bottom {
+    top: 178px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .hotmart-widget-mask--scrollbar {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 14px;
+  }
+
+  @media (max-width: 430px) {
+    .hotmart-widget-viewport {
+      height: 176px;
+    }
+
+    .hotmart-widget-viewport #hotmart-sales-funnel iframe,
+    .hotmart-widget-viewport #hotmart-sales-funnel .custom-element__iframe {
+      transform: translate(-50%, -150px);
+    }
+
+    .hotmart-widget-mask--legal {
+      top: 80px;
+      height: 58px;
+    }
+
+    .hotmart-widget-mask--bottom {
+      top: 170px;
+    }
+  }
 
 
 
