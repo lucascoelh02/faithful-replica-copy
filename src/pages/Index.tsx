@@ -20,6 +20,7 @@ const showHotmartFunnel = () => {
   const section = document.querySelector<HTMLElement>("#hotmart-funnel-section");
   if (!section) return;
   section.style.display = "block";
+  section.setAttribute("aria-hidden", "false");
   requestAnimationFrame(() => section.classList.add("is-visible"));
   try {
     localStorage.setItem(STORAGE_KEY, "true");
@@ -197,8 +198,17 @@ const Index = () => {
         </div>
 
         {/* Hotmart Sales Funnel widget — revealed at 4:50 of real video progress */}
-        <section id="hotmart-funnel-section" aria-hidden="false">
-          <div id="hotmart-sales-funnel" />
+        <section
+          id="hotmart-funnel-section"
+          className="hotmart-funnel hotmart-funnel--gated"
+          aria-hidden="true"
+        >
+          <div className="hotmart-widget-viewport">
+            <div id="hotmart-sales-funnel" />
+            <span className="hotmart-widget-mask hotmart-widget-mask--legal" aria-hidden="true" />
+            <span className="hotmart-widget-mask hotmart-widget-mask--bottom" aria-hidden="true" />
+            <span className="hotmart-widget-mask hotmart-widget-mask--scrollbar" aria-hidden="true" />
+          </div>
         </section>
       </main>
 

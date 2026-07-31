@@ -246,6 +246,6 @@
   justify-content: center;
 }
 
-.ait-funnel #hotmart-sales-funnel {
-  width: 100%;
+.ait-funnel .hotmart-widget-viewport {
+  --hotmart-mask-background: var(--ait-bg);
 }
