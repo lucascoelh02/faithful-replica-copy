@@ -146,12 +146,7 @@ const AdiosImanToxico = () => {
           className="ait-funnel hotmart-funnel hotmart-funnel--instant"
           aria-hidden="false"
         >
-          <div className="hotmart-widget-viewport">
-            <div id="hotmart-sales-funnel" />
-            <span className="hotmart-widget-mask hotmart-widget-mask--legal" aria-hidden="true" />
-            <span className="hotmart-widget-mask hotmart-widget-mask--bottom" aria-hidden="true" />
-            <span className="hotmart-widget-mask hotmart-widget-mask--scrollbar" aria-hidden="true" />
-          </div>
+          <div id="hotmart-sales-funnel" />
         </section>
 
 
