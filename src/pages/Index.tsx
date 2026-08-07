@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const EXPERT_BG_URL = "/images/background-upsell.png";
 
 declare global {
   namespace JSX {
