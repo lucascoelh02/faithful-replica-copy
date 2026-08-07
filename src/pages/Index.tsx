@@ -32,15 +32,28 @@ const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
-  // Animate progress 0% -> 100% once, over ~600s
+  // Animate progress 0% -> 70% quickly, then 70% -> 100% over ~600s
   useEffect(() => {
     const start = performance.now();
-    const duration = 600000;
+    const quickMs = 1500;
+    const slowMs = 600000;
+    const totalMs = quickMs + slowMs;
+    const quickRatio = quickMs / totalMs;
     let raf = 0;
+
+    const easeOutQuad = (p: number) => 1 - Math.pow(1 - p, 2);
+
     const tick = (now: number) => {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 2);
-      setProgress(Math.round(eased * 100));
+      const t = Math.min((now - start) / totalMs, 1);
+      let value: number;
+      if (t <= quickRatio) {
+        const p = easeOutQuad(t / quickRatio);
+        value = p * 70;
+      } else {
+        const p = easeOutQuad((t - quickRatio) / (1 - quickRatio));
+        value = 70 + p * 30;
+      }
+      setProgress(Math.round(value));
       if (t < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
