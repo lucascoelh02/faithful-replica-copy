@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const EXPERT_BG_URL = "/images/background-upsell.png";
 
 declare global {
   namespace JSX {
@@ -31,6 +30,24 @@ const showHotmartFunnel = () => {
 
 const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(78);
+
+  // Animate progress 78% -> 100% once, over ~11s
+  useEffect(() => {
+    const start = performance.now();
+    const duration = 11000;
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 2);
+      setProgress(Math.round(78 + eased * 22));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+
 
   // Load VTurb script
   useEffect(() => {
@@ -117,34 +134,14 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-stage">
-      {/* Expert photo background */}
-      <div
-        className="expert-bg"
-        aria-hidden="true"
-        style={{ ["--expert-photo" as string]: `url("${EXPERT_BG_URL}")` }}
-      />
-      <div className="gold-dots" aria-hidden="true">
-        <span /><span /><span /><span /><span /><span />
-      </div>
+      {/* Neutral premium gradient background */}
+      <div className="stage-gradient" aria-hidden="true" />
 
-      {/* Fixed urgency bar */}
+      {/* Fixed urgency line */}
       <div className="urgency-bar" role="status" aria-live="polite">
         <div className="urgency-inner">
-          <svg
-            className="urgency-clock"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 7v5l3 2" />
-          </svg>
-          <span className="urgency-text">Tu compra está siendo procesada</span>
-          <span className="urgency-dots" aria-hidden="true">
-            <i /><i /><i />
+          <span className="urgency-text">
+            ⚠️ NO CIERRES ESTA PÁGINA — tu acceso está siendo preparado
           </span>
         </div>
       </div>
@@ -152,10 +149,34 @@ const Index = () => {
       {/* Spacer for the fixed bar */}
       <div className="h-12" aria-hidden="true" />
 
-      <main className="relative z-10 mx-auto flex w-full max-w-[520px] flex-col items-center px-5 pb-16 pt-8">
-        <h1 className="headline">
-          Descubre la FRASE que hace que un hombre deje de ignorarte y quiera un compromiso serio.
+      <main className="relative z-10 mx-auto flex w-full max-w-[520px] flex-col items-center px-5 pb-16 pt-4">
+        {/* Progress bar */}
+        <div
+          className="progress-track"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={progress}
+        >
+          <div className="progress-fill" style={{ width: `${progress}%` }}>
+            <span className="progress-value">{progress}%</span>
+          </div>
+        </div>
+
+        <h1 className="headline mt-5">
+          Solo falta 1 paso para que accedas a tu guía.
         </h1>
+
+        <p className="subheadline mt-3">
+          Tus frases despiertan la obsesión. Aquí está lo que transforma la obsesión en una{" "}
+          <strong>PROPUESTA DE NOVIAZGO</strong>.
+        </p>
+
+        <div className="social-proof mt-4">
+          <span className="social-proof-icon" aria-hidden="true">⚠️</span>
+          <span>El 87,3% de las alumnas de la guía dicen: ¡SÍ!</span>
+        </div>
+
 
         {/* VTurb Video Player */}
         <div ref={vturbContainerRef} className="player-frame mt-7">
