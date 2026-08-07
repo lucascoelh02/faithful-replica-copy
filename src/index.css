@@ -173,8 +173,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(90deg, #1a0207 0%, #3d030b 45%, #0a0203 100%);
-    border-bottom: 1px solid rgba(204, 0, 0, 0.55);
+    background: linear-gradient(90deg, #1a0410 0%, #33061c 45%, #0a0407 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
     overflow: hidden;
   }
 
