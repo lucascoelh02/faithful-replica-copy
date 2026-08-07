@@ -30,17 +30,17 @@ const showHotmartFunnel = () => {
 
 const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(78);
+  const [progress, setProgress] = useState(0);
 
-  // Animate progress 78% -> 100% once, over ~11s
+  // Animate progress 0% -> 100% once, over ~600s
   useEffect(() => {
     const start = performance.now();
-    const duration = 11000;
+    const duration = 600000;
     let raf = 0;
     const tick = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 2);
-      setProgress(Math.round(78 + eased * 22));
+      setProgress(Math.round(eased * 100));
       if (t < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
