@@ -154,8 +154,7 @@ const Index = () => {
 
       <main className="relative z-10 mx-auto flex w-full max-w-[520px] flex-col items-center px-5 pb-16 pt-8">
         <h1 className="headline">
-          Mira la clase de bienvenida y reclama tu{" "}
-          <span className="gold-text">regalo especial</span>.
+          Descubre la FRASE que hace que un hombre deje de ignorarte y quiera un compromiso serio.
         </h1>
 
         {/* VTurb Video Player */}
