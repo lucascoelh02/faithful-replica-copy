@@ -331,18 +331,6 @@
 
   .hotmart-funnel #hotmart-sales-funnel {
     width: 100%;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-  }
-
-  .hotmart-funnel #hotmart-sales-funnel .custom-element__iframe {
-    display: block;
-    width: 100%;
-    margin: 0 auto;
-    background: transparent;
-    border: 0;
-    color-scheme: normal;
   }
 
 
