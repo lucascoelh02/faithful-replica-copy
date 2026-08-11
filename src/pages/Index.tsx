@@ -66,7 +66,7 @@ const Index = () => {
   useEffect(() => {
     const script = document.createElement("script");
     const SRC =
-      "https://scripts.converteai.net/a63caa10-e974-4189-be32-9f2c7cd675f5/players/6a6b2e4240f9e76dea05afb1/v4/player.js";
+      "https://scripts.converteai.net/8b094072-28cc-4b6c-89e6-7fdc278d36fa/players/6a7a70af784b30f21a6da776/v4/player.js";
     if (document.querySelector(`script[src="${SRC}"]`)) return;
     script.src = SRC;
     script.async = true;
@@ -195,7 +195,7 @@ const Index = () => {
         <div ref={vturbContainerRef} className="player-frame mt-7">
           <div className="player-inner">
             <vturb-smartplayer
-              id="vid-6a6b2e4240f9e76dea05afb1"
+              id="vid-6a7a70af784b30f21a6da776"
               aria-label="Clase de bienvenida en video"
               style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
             >
@@ -204,7 +204,7 @@ const Index = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  padding: "178.14814814814815% 0 0",
+                  padding: "177.77777777777777% 0 0",
                   zIndex: 0,
                   backgroundColor: "black",
                 }}
