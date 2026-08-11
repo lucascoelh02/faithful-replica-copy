@@ -77,20 +77,22 @@ const Index = () => {
     };
   }, []);
 
-  // Load Hotmart checkout elements script once and mount the widget once
+  // HOTMART - Sales Funnel Widget: load script once and mount once
   useEffect(() => {
-    let mounted = false;
-
-    const mount = () => {
-      if (mounted) return;
-      const el = document.querySelector("#hotmart-sales-funnel");
-      const ce = (window as unknown as { checkoutElements?: any }).checkoutElements;
-      if (!el || !ce || el.childElementCount > 0) return;
-      mounted = true;
-      ce.init("salesFunnel").mount("#hotmart-sales-funnel");
+    const SRC = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+    const w = window as unknown as {
+      checkoutElements?: any;
+      __hotmartFunnelMounted?: boolean;
     };
 
-    const SRC = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+    const mount = () => {
+      if (w.__hotmartFunnelMounted) return;
+      const el = document.querySelector("#hotmart-sales-funnel");
+      if (!el || !w.checkoutElements) return;
+      w.__hotmartFunnelMounted = true;
+      w.checkoutElements.init("salesFunnel").mount("#hotmart-sales-funnel");
+    };
+
     let script = document.querySelector<HTMLScriptElement>(`script[src="${SRC}"]`);
     if (!script) {
       script = document.createElement("script");
@@ -98,7 +100,8 @@ const Index = () => {
       script.async = true;
       document.head.appendChild(script);
     }
-    if ((window as unknown as { checkoutElements?: unknown }).checkoutElements) {
+
+    if (w.checkoutElements) {
       mount();
     } else {
       script.addEventListener("load", mount);
