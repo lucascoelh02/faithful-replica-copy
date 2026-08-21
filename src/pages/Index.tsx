@@ -90,7 +90,7 @@ const Index = () => {
       const el = document.querySelector("#hotmart-sales-funnel");
       if (!el || !w.checkoutElements) return;
       w.__hotmartFunnelMounted = true;
-      w.checkoutElements.init("salesFunnel").mount("#hotmart-sales-funnel");
+      w.checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
     };
 
     let script = document.querySelector<HTMLScriptElement>(`script[src="${SRC}"]`);
@@ -222,7 +222,7 @@ const Index = () => {
           className="hotmart-funnel hotmart-funnel--gated"
           aria-hidden="true"
         >
-          <div id="hotmart-sales-funnel" />
+          <div id="hotmart-sales-funnel"></div>
         </section>
       </main>
 
