@@ -180,12 +180,11 @@ const Index = () => {
         </div>
 
         <h1 className="headline mt-5">
-          Solo falta 1 paso para que accedas a tu guía.
+          Solo falta 1 paso para que accedas a tu método completo.
         </h1>
 
         <p className="subheadline mt-3">
-          Tus frases despiertan la obsesión. Aquí está lo que transforma la obsesión en una{" "}
-          <strong>PROPUESTA DE NOVIAZGO</strong>.
+          El desafío detiene las peleas. Aquí está lo que evita que los viejos patrones destruyan el cambio que acabas de comenzar.
         </p>
 
         <div className="social-proof mt-4">
