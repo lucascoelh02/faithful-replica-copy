@@ -90,7 +90,7 @@ const Index = () => {
       const el = document.querySelector("#hotmart-sales-funnel");
       if (!el || !w.checkoutElements) return;
       w.__hotmartFunnelMounted = true;
-      checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+      w.checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
     };
 
     let script = document.querySelector<HTMLScriptElement>(`script[src="${SRC}"]`);
