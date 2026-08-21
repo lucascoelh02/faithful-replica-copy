@@ -215,22 +215,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Security signal */}
-        <div className="secure-box mt-5">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3z" />
-            <path d="M9.5 12.2l1.9 1.9 3.4-3.6" />
-          </svg>
-          <span>Compra 100% segura · Procesamiento cifrado</span>
-        </div>
 
         {/* Hotmart Sales Funnel widget — revealed at 4:50 of real video progress */}
         <section
