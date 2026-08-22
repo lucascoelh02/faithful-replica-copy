@@ -307,21 +307,19 @@
   }
 
   /* ---------- Hotmart funnel section ---------- */
-  .bg-stage #hotmart-funnel-section {
+  #hotmart-funnel-delay {
     display: none;
+  }
+
+  .bg-stage #hotmart-funnel-delay {
     width: 100%;
     max-width: 380px;
     margin: 28px auto 0;
-    opacity: 0;
     background: transparent;
     border: 0;
     box-shadow: none;
-    transition: opacity 0.45s ease;
   }
 
-  .bg-stage #hotmart-funnel-section.is-visible {
-    opacity: 1;
-  }
 
   .hotmart-funnel {
     width: 100%;
