@@ -184,7 +184,7 @@ const Index = () => {
         <div ref={vturbContainerRef} className="player-frame mt-7">
           <div className="player-inner">
             <vturb-smartplayer
-              id="vid-6a7a70af784b30f21a6da776"
+              id="vid-6a897568352978437ed192d2"
               aria-label="Clase de bienvenida en video"
               style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
             >
@@ -193,7 +193,7 @@ const Index = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  padding: "177.77777777777777% 0 0",
+                  padding: "177.96296296296296% 0 0",
                   zIndex: 0,
                   backgroundColor: "black",
                 }}
@@ -203,14 +203,11 @@ const Index = () => {
         </div>
 
 
-        {/* Hotmart Sales Funnel widget — revealed at 4:50 of real video progress */}
-        <section
-          id="hotmart-funnel-section"
-          className="hotmart-funnel hotmart-funnel--gated"
-          aria-hidden="true"
-        >
+        {/* Hotmart Sales Funnel widget — revealed at 8:58 of real video progress */}
+        <div id="hotmart-funnel-delay" className="hotmart-funnel">
           <div id="hotmart-sales-funnel"></div>
-        </section>
+        </div>
+
       </main>
 
     </div>
