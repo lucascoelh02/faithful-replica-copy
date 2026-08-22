@@ -12,21 +12,8 @@ declare global {
   }
 }
 
-const SECONDS_TO_DISPLAY = 290;
-const STORAGE_KEY = "alreadyElsDisplayed290";
+const SECONDS_TO_DISPLAY = 538;
 
-const showHotmartFunnel = () => {
-  const section = document.querySelector<HTMLElement>("#hotmart-funnel-section");
-  if (!section) return;
-  section.style.display = "block";
-  section.setAttribute("aria-hidden", "false");
-  requestAnimationFrame(() => section.classList.add("is-visible"));
-  try {
-    localStorage.setItem(STORAGE_KEY, "true");
-  } catch {
-    /* ignore */
-  }
-};
 
 const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
@@ -66,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     const script = document.createElement("script");
     const SRC =
-      "https://scripts.converteai.net/8b094072-28cc-4b6c-89e6-7fdc278d36fa/players/6a7a70af784b30f21a6da776/v4/player.js";
+      "https://scripts.converteai.net/5c8a1932-3c2a-4445-8f46-4e8d7b9ddb08/players/6a897568352978437ed192d2/v4/player.js";
     if (document.querySelector(`script[src="${SRC}"]`)) return;
     script.src = SRC;
     script.async = true;
@@ -112,40 +99,40 @@ const Index = () => {
     };
   }, []);
 
-  // Reveal widget based on real VTurb video progress (or previous unlock)
+  // Reveal widget based on real VTurb video progress
   useEffect(() => {
-    let released = false;
-    try {
-      if (localStorage.getItem(STORAGE_KEY) === "true") {
-        released = true;
-        showHotmartFunnel();
-      }
-    } catch {
-      /* ignore */
-    }
-    if (released) return;
-
     let attempts = 0;
-    const watch = () => {
-      const sp = (window as unknown as { smartplayer?: any }).smartplayer;
-      if (!sp || !sp.instances || !sp.instances.length) return false;
-      const player = sp.instances[0];
-      player.on("timeupdate", () => {
-        if (player.video?.currentTime >= SECONDS_TO_DISPLAY) {
-          showHotmartFunnel();
-        }
-      });
+    let cleanup: (() => void) | undefined;
+
+    const attach = () => {
+      const el = document.querySelector<HTMLElement & {
+        displayHiddenElements?: (s: number, sel: string[], o?: any) => void;
+      }>("vturb-smartplayer");
+      if (!el) return false;
+      const onReady = function (this: any) {
+        this.displayHiddenElements?.(SECONDS_TO_DISPLAY, ["#hotmart-funnel-delay"], {
+          persist: true,
+        });
+      };
+      el.addEventListener("player:ready", onReady);
+      cleanup = () => el.removeEventListener("player:ready", onReady);
       return true;
     };
 
-    if (watch()) return;
-    const interval = window.setInterval(() => {
-      attempts += 1;
-      if (watch() || attempts > 120) window.clearInterval(interval);
-    }, 500);
+    if (!attach()) {
+      const interval = window.setInterval(() => {
+        attempts += 1;
+        if (attach() || attempts > 120) window.clearInterval(interval);
+      }, 500);
+      return () => {
+        window.clearInterval(interval);
+        cleanup?.();
+      };
+    }
 
-    return () => window.clearInterval(interval);
+    return () => cleanup?.();
   }, []);
+
 
 
   return (
@@ -197,7 +184,7 @@ const Index = () => {
         <div ref={vturbContainerRef} className="player-frame mt-7">
           <div className="player-inner">
             <vturb-smartplayer
-              id="vid-6a7a70af784b30f21a6da776"
+              id="vid-6a897568352978437ed192d2"
               aria-label="Clase de bienvenida en video"
               style={{ display: "block", margin: "0 auto", width: "100%", maxWidth: "400px" }}
             >
@@ -206,7 +193,7 @@ const Index = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  padding: "177.77777777777777% 0 0",
+                  padding: "177.96296296296296% 0 0",
                   zIndex: 0,
                   backgroundColor: "black",
                 }}
@@ -216,14 +203,11 @@ const Index = () => {
         </div>
 
 
-        {/* Hotmart Sales Funnel widget — revealed at 4:50 of real video progress */}
-        <section
-          id="hotmart-funnel-section"
-          className="hotmart-funnel hotmart-funnel--gated"
-          aria-hidden="true"
-        >
+        {/* Hotmart Sales Funnel widget — revealed at 8:58 of real video progress */}
+        <div id="hotmart-funnel-delay" className="hotmart-funnel">
           <div id="hotmart-sales-funnel"></div>
-        </section>
+        </div>
+
       </main>
 
     </div>
