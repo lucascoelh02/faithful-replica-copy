@@ -53,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     const script = document.createElement("script");
     const SRC =
-      "https://scripts.converteai.net/8b094072-28cc-4b6c-89e6-7fdc278d36fa/players/6a7a70af784b30f21a6da776/v4/player.js";
+      "https://scripts.converteai.net/5c8a1932-3c2a-4445-8f46-4e8d7b9ddb08/players/6a897568352978437ed192d2/v4/player.js";
     if (document.querySelector(`script[src="${SRC}"]`)) return;
     script.src = SRC;
     script.async = true;
@@ -99,40 +99,40 @@ const Index = () => {
     };
   }, []);
 
-  // Reveal widget based on real VTurb video progress (or previous unlock)
+  // Reveal widget based on real VTurb video progress
   useEffect(() => {
-    let released = false;
-    try {
-      if (localStorage.getItem(STORAGE_KEY) === "true") {
-        released = true;
-        showHotmartFunnel();
-      }
-    } catch {
-      /* ignore */
-    }
-    if (released) return;
-
     let attempts = 0;
-    const watch = () => {
-      const sp = (window as unknown as { smartplayer?: any }).smartplayer;
-      if (!sp || !sp.instances || !sp.instances.length) return false;
-      const player = sp.instances[0];
-      player.on("timeupdate", () => {
-        if (player.video?.currentTime >= SECONDS_TO_DISPLAY) {
-          showHotmartFunnel();
-        }
-      });
+    let cleanup: (() => void) | undefined;
+
+    const attach = () => {
+      const el = document.querySelector<HTMLElement & {
+        displayHiddenElements?: (s: number, sel: string[], o?: any) => void;
+      }>("vturb-smartplayer");
+      if (!el) return false;
+      const onReady = function (this: any) {
+        this.displayHiddenElements?.(SECONDS_TO_DISPLAY, ["#hotmart-funnel-delay"], {
+          persist: true,
+        });
+      };
+      el.addEventListener("player:ready", onReady);
+      cleanup = () => el.removeEventListener("player:ready", onReady);
       return true;
     };
 
-    if (watch()) return;
-    const interval = window.setInterval(() => {
-      attempts += 1;
-      if (watch() || attempts > 120) window.clearInterval(interval);
-    }, 500);
+    if (!attach()) {
+      const interval = window.setInterval(() => {
+        attempts += 1;
+        if (attach() || attempts > 120) window.clearInterval(interval);
+      }, 500);
+      return () => {
+        window.clearInterval(interval);
+        cleanup?.();
+      };
+    }
 
-    return () => window.clearInterval(interval);
+    return () => cleanup?.();
   }, []);
+
 
 
   return (
