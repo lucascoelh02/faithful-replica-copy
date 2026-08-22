@@ -12,21 +12,8 @@ declare global {
   }
 }
 
-const SECONDS_TO_DISPLAY = 290;
-const STORAGE_KEY = "alreadyElsDisplayed290";
+const SECONDS_TO_DISPLAY = 538;
 
-const showHotmartFunnel = () => {
-  const section = document.querySelector<HTMLElement>("#hotmart-funnel-section");
-  if (!section) return;
-  section.style.display = "block";
-  section.setAttribute("aria-hidden", "false");
-  requestAnimationFrame(() => section.classList.add("is-visible"));
-  try {
-    localStorage.setItem(STORAGE_KEY, "true");
-  } catch {
-    /* ignore */
-  }
-};
 
 const Index = () => {
   const vturbContainerRef = useRef<HTMLDivElement>(null);
